@@ -1,8 +1,9 @@
 import * as React from "react";
-import { RatingBase, Rating, RatingSize, IRating,initializeIcons, IRatingProps } from "@fluentui/react"; 
+import { ITheme, createTheme, getTheme, IRatingStyles, RatingBase, Rating, RatingSize, IRating,initializeIcons, IRatingProps } from "@fluentui/react"; 
 import { useState, useEffect, useRef} from "react";
 import {useConst} from "@uifabric/react-hooks";
-import usePrevious from "./usePrevious"
+//import  getStyles  from '@fluentui/react/lib/Rating';
+
 
 
 
@@ -13,17 +14,20 @@ export interface IProps {
 }
 
 
+const customTheme: ITheme = createTheme(getTheme());
+customTheme.palette.themeDark = "#ffbf00"; //= hover
+customTheme.palette.themePrimary = "#ffbf00"; //= hover contour
+customTheme.palette.neutralPrimary = "#ffbf00";   // icon color
+//customTheme.palette.neutralSecondary = "#ffbf00"; // contour
+
 const RatingControl = (props:IProps): JSX.Element => {
 
     //REF Object
-    const ratingRef = useRef<IRating>(null);
+    const componentRef = useRef<IRating>(null);
     
     //STATE VARIABLES
     const [rating, setRating] = useState<number>(props.rating ?? 0);
      
-    //PREVIOUS 
-    // Get the previous value (was passed into hook on last render)
-    const previousRating = usePrevious(rating);
     
     //Will run once on first render, like a constructor
     useConst(() => {
@@ -55,15 +59,15 @@ const RatingControl = (props:IProps): JSX.Element => {
 
     const onStarChange = (ev: React.FocusEvent<HTMLElement>, rating?: number): void => {
         //console.log("RatingControl - onStarChanged : " + rating)
-        //setRating(rating ?? 0); //=> use setter to update state variable
+        setRating(rating ?? 0); //=> use setter to update state variable
     };
 
     const onClickEvent = (ev: React.MouseEvent<HTMLElement>): void => {
         console.log("Clicked : ");
 
         console.log("Previous: " + rating);
-        if(ratingRef.current !== null){
-            let current:RatingBase = ratingRef.current as RatingBase;
+        if(componentRef.current !== null){
+            let current:RatingBase = componentRef.current as RatingBase;
             let newRating = current.state.rating as number;
             console.log("New: " + newRating);
 
@@ -72,27 +76,25 @@ const RatingControl = (props:IProps): JSX.Element => {
 
     };
 
+    //STYLES
     
 
-    console.log("RatingControl - Rendering : rating = " + rating)
+    //console.log("RatingControl - Rendering : rating = " + rating)
     return (
     
         <Rating
-            componentRef={ratingRef}    
+            componentRef={componentRef}    
             min={0} 
             max={5}
             size={RatingSize.Large}
-            rating={rating}
-            //onChange={onStarChange}
+            rating={rating}            
             allowZeroStars={true}
+            //onChange={onStarChange}
             onClick={onClickEvent}
+            theme={customTheme}
             
         />
-    );
-
-            
-
-         
+    );       
      
 }
 export default RatingControl;

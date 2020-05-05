@@ -6,8 +6,7 @@ import RatingControl, {IProps} from "./RatingControl";
 export class Rating implements ComponentFramework.StandardControl<IInputs, IOutputs> {
 
 	private _notifyOutputChanged:() => void;
-	private _container: HTMLDivElement;
-	//private _context: ComponentFramework.Context<IInputs>;	
+	private _container: HTMLDivElement;	
 
 	private _selectedRating:number|undefined;
 
@@ -40,7 +39,6 @@ export class Rating implements ComponentFramework.StandardControl<IInputs, IOutp
 		// Add control initialization code
 		this._notifyOutputChanged = notifyOutputChanged;
 		this._container = document.createElement("div");
-		//this._context = context;
 		container.appendChild(this._container);
 	}
 
@@ -53,14 +51,14 @@ export class Rating implements ComponentFramework.StandardControl<IInputs, IOutp
 	{
 		// Add code to update control view
 		this._selectedRating = context.parameters.ratingvalue.raw || undefined;
-		if(this._props.rating !== this._selectedRating){
-			this._props.rating = this._selectedRating;
-			console.log("index - updateView->Render props.rating = " + this._props.rating);
-			ReactDOM.render(
-				React.createElement(RatingControl,this._props)
-				, this._container
-			);
-		}
+		
+		this._props.rating = this._selectedRating;
+		console.log("index - updateView->Render props.rating = " + this._props.rating);
+		ReactDOM.render(
+			React.createElement(RatingControl,this._props)
+			, this._container
+		);
+		
 
 	}
 
