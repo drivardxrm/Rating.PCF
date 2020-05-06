@@ -1,29 +1,39 @@
 import * as React from "react";
-import { ITheme, createTheme, getTheme, IRatingStyles, RatingBase, Rating, RatingSize, IRating,initializeIcons, IRatingProps } from "@fluentui/react"; 
-import { useState, useEffect, useRef} from "react";
+import { ITheme, createTheme, getTheme, RatingBase, Rating, RatingSize, IRating,initializeIcons, IRatingProps } from "@fluentui/react"; 
+import { useState, useEffect, useRef, useMemo} from "react";
 import {useConst} from "@uifabric/react-hooks";
-//import  getStyles  from '@fluentui/react/lib/Rating';
+
 
 
 
 
 export interface IProps {
     
-    rating: number|undefined;   
+    //properties
+    rating: number|undefined;
+    icon: string;
+    unselectedicon:string;
+    color: string;
+    maxvalue:number;
+
+    //return function
     onChange: (rating:number|undefined) => void;
 }
 
-
-const customTheme: ITheme = createTheme(getTheme());
-customTheme.palette.themeDark = "#ffbf00"; //= hover
-customTheme.palette.themePrimary = "#ffbf00"; //= hover contour
-customTheme.palette.neutralPrimary = "#ffbf00";   // icon color
-//customTheme.palette.neutralSecondary = "#ffbf00"; // contour
 
 const RatingControl = (props:IProps): JSX.Element => {
 
     //REF Object
     const componentRef = useRef<IRating>(null);
+
+    //MEMO
+    const componentTheme = useMemo<ITheme>(()=>{
+        let customTheme: ITheme = createTheme(getTheme());
+        customTheme.palette.themeDark = props.color; //= hover
+        customTheme.palette.themePrimary = props.color; //= hover contour
+        customTheme.palette.neutralPrimary = props.color;   // icon color
+        return customTheme;
+    },[]);
     
     //STATE VARIABLES
     const [rating, setRating] = useState<number>(props.rating ?? 0);
@@ -47,7 +57,7 @@ const RatingControl = (props:IProps): JSX.Element => {
         }
         
     }, [rating]);  //WHEN rating changes, 
-
+ 
     useEffect(() => {
         //console.log("RatingControl - useEffect props changed : " + props.rating);
         if(rating !== props.rating)
@@ -68,7 +78,7 @@ const RatingControl = (props:IProps): JSX.Element => {
         console.log("Previous: " + rating);
         if(componentRef.current !== null){
             let current:RatingBase = componentRef.current as RatingBase;
-            let newRating = current.state.rating as number;
+            let newRating = current.state.rating ?? 0; 
             console.log("New: " + newRating);
 
             setRating(newRating === rating ? 0 : newRating);
@@ -76,22 +86,21 @@ const RatingControl = (props:IProps): JSX.Element => {
 
     };
 
-    //STYLES
-    
-
     //console.log("RatingControl - Rendering : rating = " + rating)
     return (
     
         <Rating
-            componentRef={componentRef}    
+            componentRef={componentRef} 
+            icon={props.icon}   
+            unselectedIcon={props.unselectedicon}
             min={0} 
-            max={5}
+            max={props.maxvalue}
             size={RatingSize.Large}
             rating={rating}            
             allowZeroStars={true}
             //onChange={onStarChange}
             onClick={onClickEvent}
-            theme={customTheme}
+            theme={componentTheme}
             
         />
     );       

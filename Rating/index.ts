@@ -13,6 +13,10 @@ export class Rating implements ComponentFramework.StandardControl<IInputs, IOutp
 	private _props:IProps = 
 	{
 		rating:undefined,
+		icon:"",
+		unselectedicon:"",
+		color:"",
+		maxvalue: 0,
 		onChange: this.notifyChange.bind(this)
 	}
 	
@@ -53,7 +57,14 @@ export class Rating implements ComponentFramework.StandardControl<IInputs, IOutp
 		this._selectedRating = context.parameters.ratingvalue.raw || undefined;
 		
 		this._props.rating = this._selectedRating;
-		console.log("index - updateView->Render props.rating = " + this._props.rating);
+		this._props.icon = context.parameters.icon.raw || "";
+		this._props.unselectedicon = context.parameters.unselectedicon.raw || "";
+		this._props.color = context.parameters.color.raw || "";
+		this._props.maxvalue = context.parameters.maxvalue.raw ?? 0;
+
+			
+		
+		//console.log("index - updateView->Render props.rating = " + this._props.rating);
 		ReactDOM.render(
 			React.createElement(RatingControl,this._props)
 			, this._container
@@ -64,7 +75,7 @@ export class Rating implements ComponentFramework.StandardControl<IInputs, IOutp
 
 	private notifyChange(newRating:number|undefined)
 	{
-		console.log("index - notifyChange : newrating = " + newRating);
+		//console.log("index - notifyChange : newrating = " + newRating);
 		this._selectedRating = newRating;
 		this._notifyOutputChanged();
 	}
@@ -76,7 +87,7 @@ export class Rating implements ComponentFramework.StandardControl<IInputs, IOutp
 	 */
 	public getOutputs(): IOutputs
 	{
-		console.log("index - getOutputs() : ratingvalue = " + this._selectedRating);
+		//console.log("index - getOutputs() : ratingvalue = " + this._selectedRating);
 		return {
 			ratingvalue:this._selectedRating
 		};
