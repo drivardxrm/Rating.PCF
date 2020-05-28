@@ -59,7 +59,7 @@ const RatingControl = (props:IProps): JSX.Element => {
     }, [rating]);  //WHEN rating changes, 
  
     useEffect(() => {
-        //console.log("RatingControl - useEffect props changed : " + props.rating);
+        console.log("useEffect props.rating changed : " + props.rating);
         if(rating !== props.rating)
         {
             setRating(props.rating ?? 0)
@@ -79,6 +79,7 @@ const RatingControl = (props:IProps): JSX.Element => {
         if(componentRef.current !== null){
             let current:RatingBase = componentRef.current as RatingBase;
             let newRating = current.state.rating ?? 0; 
+            
             console.log("New: " + newRating);
 
             setRating(newRating === rating ? 0 : newRating);

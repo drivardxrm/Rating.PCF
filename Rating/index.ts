@@ -1,5 +1,5 @@
 import {IInputs, IOutputs} from "./generated/ManifestTypes";
-import * as React from 'react';
+import * as react from 'react';
 import * as ReactDOM from 'react-dom';
 import RatingControl, {IProps} from "./RatingControl";
 
@@ -61,12 +61,10 @@ export class Rating implements ComponentFramework.StandardControl<IInputs, IOutp
 		this._props.unselectedicon = context.parameters.unselectedicon.raw || "";
 		this._props.color = context.parameters.color.raw || "";
 		this._props.maxvalue = context.parameters.maxvalue.raw ?? 0;
-
-			
 		
-		//console.log("index - updateView->Render props.rating = " + this._props.rating);
+		console.log("index - updateView-> Render props.rating = " + this._props.rating);
 		ReactDOM.render(
-			React.createElement(RatingControl,this._props)
+			react.createElement(RatingControl,this._props)
 			, this._container
 		);
 		
