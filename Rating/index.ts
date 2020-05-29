@@ -17,6 +17,9 @@ export class Rating implements ComponentFramework.StandardControl<IInputs, IOutp
 		unselectedicon:"",
 		color:"",
 		maxvalue: 0,
+		isMasked:false,
+		isReadonly:false,
+		
 		onChange: this.notifyChange.bind(this)
 	}
 	
@@ -53,9 +56,20 @@ export class Rating implements ComponentFramework.StandardControl<IInputs, IOutp
 	 */
 	public updateView(context: ComponentFramework.Context<IInputs>): void
 	{
+		// If the bound attribute is disabled because it is inactive or the user doesn't have access
+		let isReadOnly = context.mode.isControlDisabled;
+
+		let isMasked = false;
+		// When a field has FLS enabled, the security property on the attribute parameter is set
+		if (context.parameters.ratingvalue.security) {
+			isReadOnly = isReadOnly || !context.parameters.ratingvalue.security.editable;
+			isMasked =  !context.parameters.ratingvalue.security.readable
+		}
+		
 		// Add code to update control view
 		this._selectedRating = context.parameters.ratingvalue.raw || undefined;
 		
+		//Prepare the props to send to react component
 		this._props.rating = this._selectedRating;
 		this._props.icon = context.parameters.icon.raw || "";
 		this._props.unselectedicon = context.parameters.unselectedicon.raw || "";

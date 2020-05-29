@@ -1,10 +1,7 @@
 import * as React from "react";
-import { ITheme, createTheme, getTheme, RatingBase, Rating, RatingSize, IRating,initializeIcons, IRatingProps } from "@fluentui/react"; 
+import { ITheme,Stack,TextField,mergeStyles, FontIcon, createTheme, getTheme, RatingBase, Rating, RatingSize, IRating,initializeIcons, IRatingProps } from "@fluentui/react"; 
 import { useState, useEffect, useRef, useMemo} from "react";
 import {useConst} from "@uifabric/react-hooks";
-
-
-
 
 
 export interface IProps {
@@ -15,6 +12,9 @@ export interface IProps {
     unselectedicon:string;
     color: string;
     maxvalue:number;
+
+    isReadonly:boolean,
+    isMasked:boolean,
 
     //return function
     onChange: (rating:number|undefined) => void;
@@ -39,7 +39,7 @@ const RatingControl = (props:IProps): JSX.Element => {
     const [rating, setRating] = useState<number>(props.rating ?? 0);
      
     
-    //Will run once on first render, like a constructor
+    //Will run once on first render, like a constructor. 
     useConst(() => {
         initializeIcons();
     });
@@ -81,30 +81,51 @@ const RatingControl = (props:IProps): JSX.Element => {
             let newRating = current.state.rating ?? 0; 
             
             console.log("New: " + newRating);
-
+            //If newrating is the same as rating, means that the selected item was clicked => Clear the value
+            //otherwise set to new value
             setRating(newRating === rating ? 0 : newRating);
         }
 
     };
 
+    //STYLES
+    const lockediconclass = mergeStyles({
+        fontSize: 30,
+        height: 30,
+        width: 50,
+        margin: "1px",      
+    });
+
     //console.log("RatingControl - Rendering : rating = " + rating)
-    return (
+    if(props.isMasked){
+        return(
+            <Stack tokens={{ childrenGap: 2 }} horizontal>
+                <FontIcon iconName="Lock" className={lockediconclass} />     
+                <TextField value="*********" style={{width:"100%"}}/>
+            </Stack>
+        );
+    }
+    else{
     
-        <Rating
-            componentRef={componentRef} 
-            icon={props.icon}   
-            unselectedIcon={props.unselectedicon}
-            min={0} 
-            max={props.maxvalue}
-            size={RatingSize.Large}
-            rating={rating}            
-            allowZeroStars={true}
-            //onChange={onStarChange}
-            onClick={onClickEvent}
-            theme={componentTheme}
-            
-        />
-    );       
+        return (
+        
+            <Rating
+                componentRef={componentRef} 
+                icon={props.icon}   
+                unselectedIcon={props.unselectedicon}
+                min={0} 
+                max={props.maxvalue}
+                size={RatingSize.Large}
+                rating={rating}            
+                allowZeroStars={true}
+                //onChange={onStarChange}
+                onClick={onClickEvent}
+                theme={componentTheme}
+                readOnly={props.isReadonly}
+                
+            />
+        );
+    }       
      
 }
 export default RatingControl;

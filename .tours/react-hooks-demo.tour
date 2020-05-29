@@ -33,15 +33,15 @@
     },
     {
       "file": "Rating%5CRatingControl.tsx",
-      "line": 22,
+      "line": 19,
       "description": "**IProps : custom interface**\r\n- contains the properties that are received from the caller\r\n- contains the callback function that will signal back to the PCF when the value is changed\r\n- On change logic is handled in the index.ts file  ",
       "selection": {
         "start": {
-          "line": 10,
+          "line": 7,
           "character": 1
         },
         "end": {
-          "line": 21,
+          "line": 18,
           "character": 2
         }
       }
@@ -64,7 +64,7 @@
     {
       "file": "Rating\\RatingControl.tsx",
       "line": 34,
-      "description": "useMemo example\r\nHere the custom theme is generated dynamically depending on values received from the props\r\n\r\nusage of the useMemo hook prevents unnessesary execution  ",
+      "description": "useMemo example\r\nHere the custom theme is generated dynamically depending on values received from the props\r\n\r\nusage of the useMemo hook prevents unnessesary reevaluation  ",
       "selection": {
         "start": {
           "line": 29,
