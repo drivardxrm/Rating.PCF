@@ -9,14 +9,15 @@
     "start": "pcf-scripts start"
   },
   "dependencies": {
-    "@fluentui/react": "^7.116.0",
-    "@types/node": "^13.13.4",
-    "@types/powerapps-component-framework": "^1.2.1",
-    "@uifabric/react-hooks": "^7.4.3",
+    "@fluentui/react": "^7.117.0",
+    "@types/node": "^14.0.6",
+    "@types/powerapps-component-framework": "^1.2.3",
+    "@uifabric/react-hooks": "^7.4.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   },
   "devDependencies": {
+    "eslint-plugin-react-hooks": "^4.0.4",
     "pcf-scripts": "^1",
     "pcf-start": "^1"
   }

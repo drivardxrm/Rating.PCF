@@ -1,7 +1,8 @@
 import * as React from "react";
-import { ITheme,Stack,TextField,mergeStyles, FontIcon, createTheme, getTheme, RatingBase, Rating, RatingSize, IRating,initializeIcons, IRatingProps } from "@fluentui/react"; 
-import { useState, useEffect, useRef, useMemo} from "react";
+import { ITheme, createTheme, getTheme, RatingBase, Rating, RatingSize, IRating,initializeIcons } from "@fluentui/react"; 
+import { useState, useEffect, useRef, useMemo, useLayoutEffect} from "react";
 import {useConst} from "@uifabric/react-hooks";
+import MaskedInput from "./MaskedInput"
 
 
 export interface IProps {
@@ -33,54 +34,60 @@ const RatingControl = (props:IProps): JSX.Element => {
         customTheme.palette.themePrimary = props.color; //= hover contour
         customTheme.palette.neutralPrimary = props.color;   // icon color
         return customTheme;
-    },[]);
+    },[props.color]);
     
-    //STATE VARIABLES
-    const [rating, setRating] = useState<number>(props.rating ?? 0);
-     
-    
-    //Will run once on first render, like a constructor. 
+    //CUSTOM HOOK provided by FluentUI team : https://github.com/microsoft/fluentui/tree/master/packages/react-hooks
+    //Will run once on first render, like a constructor.    
     useConst(() => {
         initializeIcons();
     });
+    
+    //STATE HOOKS
+    const [rating, setRating] = useState<number>(props.rating ?? 0);
 
-    //EFFECT HOOKS
+    //EFFECT HOOKS - side effect after render
     useEffect(() => {
-        //console.log("RatingControl - useEffect rating changed : " + rating);
-        
+
         //if value is different from the one received from PROPS
+        //Send value back to caller (PCF)
         if(rating !== props.rating)
         {
-            //Send value back to PCF
-            //console.log("=> props.onChange(" + rating + ")");
+            
+            console.log("RatingControl - useEffect: => props.onChange(" + rating + ")");
             props.onChange(rating);
         }
         
     }, [rating]);  //WHEN rating changes, 
  
-    useEffect(() => {
-        console.log("useEffect props.rating changed : " + props.rating);
+    //LAYOUTEFFECT HOOKS - side effect before render
+    useLayoutEffect(() => {
+        
         if(rating !== props.rating)
         {
+            console.log("useLayoutEffect props.rating changed : " + props.rating);
             setRating(props.rating ?? 0)
         }
         
-    }, [props.rating]);  
+    }, [props.rating]); //Props are changed
 
+
+
+    //EVENT Handlers
     const onStarChange = (ev: React.FocusEvent<HTMLElement>, rating?: number): void => {
         //console.log("RatingControl - onStarChanged : " + rating)
         setRating(rating ?? 0); //=> use setter to update state variable
     };
 
+    //Hack to put value at zero if the selected value is clicked again
     const onClickEvent = (ev: React.MouseEvent<HTMLElement>): void => {
-        console.log("Clicked : ");
+        console.log("Rating control Clicked : ");
 
-        console.log("Previous: " + rating);
+        console.log("Previous value: " + rating);
         if(componentRef.current !== null){
             let current:RatingBase = componentRef.current as RatingBase;
             let newRating = current.state.rating ?? 0; 
             
-            console.log("New: " + newRating);
+            console.log("New value: " + newRating);
             //If newrating is the same as rating, means that the selected item was clicked => Clear the value
             //otherwise set to new value
             setRating(newRating === rating ? 0 : newRating);
@@ -88,25 +95,14 @@ const RatingControl = (props:IProps): JSX.Element => {
 
     };
 
-    //STYLES
-    const lockediconclass = mergeStyles({
-        fontSize: 30,
-        height: 30,
-        width: 50,
-        margin: "1px",      
-    });
 
-    //console.log("RatingControl - Rendering : rating = " + rating)
     if(props.isMasked){
         return(
-            <Stack tokens={{ childrenGap: 2 }} horizontal>
-                <FontIcon iconName="Lock" className={lockediconclass} />     
-                <TextField value="*********" style={{width:"100%"}}/>
-            </Stack>
+            <MaskedInput/>
         );
     }
     else{
-    
+        console.log("RatingControl - Rendering : rating = " + rating)
         return (
         
             <Rating
