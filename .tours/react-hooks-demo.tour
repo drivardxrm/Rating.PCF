@@ -2,6 +2,36 @@
   "title": "React Hooks Demo",
   "steps": [
     {
+      "file": "tsconfig.json",
+      "line": 5,
+      "description": "For debugging purposes\r\nhttps://www.youtube.com/watch?v=Ov-m5FBUj9g&feature=youtu.be",
+      "selection": {
+        "start": {
+          "line": 5,
+          "character": 9
+        },
+        "end": {
+          "line": 5,
+          "character": 26
+        }
+      }
+    },
+    {
+      "file": "node_modules\\pcf-scripts\\webpackConfig.js",
+      "line": 36,
+      "description": "For debugging purposes\r\nhttps://www.youtube.com/watch?v=Ov-m5FBUj9g&feature=youtu.be",
+      "selection": {
+        "start": {
+          "line": 36,
+          "character": 9
+        },
+        "end": {
+          "line": 36,
+          "character": 102
+        }
+      }
+    },
+    {
       "file": "package.json",
       "line": 18,
       "description": "**Install dependencies on React and FluentUI**\r\n\r\n>> npm install react react-dom @fluentui/react @uifabric/react-hooks\r\n\r\n**Productivity Tip** : use community tools like **PCF Builder** or **PCF Yeoman Generator** \r\n\r\n",

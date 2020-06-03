@@ -1,0 +1,45 @@
+{
+    "parser": "@typescript-eslint/parser",
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es6": true,
+        "jest": true,
+        "jasmine": true
+    },
+    "extends": [
+        "plugin:@typescript-eslint/recommended",
+        "plugin:prettier/recommended",
+        "plugin:react/recommended",
+        "prettier",
+        "prettier/@typescript-eslint",
+        "prettier/react"
+    ],
+    "parserOptions": {
+        "project": "./tsconfig.json"
+    },
+    "settings": {
+        "react": {
+          "pragma": "React",
+          "version": "detect"
+        }
+      },
+    "plugins": [
+        "@typescript-eslint",
+        "prettier",
+        "react-hooks"
+    ],
+    "rules": {
+        "prettier/prettier": "warn",
+        "react-hooks/rules-of-hooks": "error", // Checks rules of Hooks
+        "react-hooks/exhaustive-deps": "warn" // Checks effect dependencies
+    },
+    "overrides": [
+        {
+          "files": ["*.ts"],
+          "rules": {
+            "camelcase": [2, { "properties": "never" }]
+          }
+        }
+      ]
+}
