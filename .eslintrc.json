@@ -11,7 +11,7 @@
         "plugin:@typescript-eslint/recommended",
         "plugin:prettier/recommended",
         "plugin:react/recommended",
-        "prettier",
+        //"prettier",
         "prettier/@typescript-eslint",
         "prettier/react"
     ],
@@ -30,7 +30,7 @@
         "react-hooks"
     ],
     "rules": {
-        "prettier/prettier": "warn",
+        //"prettier/prettier": "warn",
         "react-hooks/rules-of-hooks": "error", // Checks rules of Hooks
         "react-hooks/exhaustive-deps": "warn" // Checks effect dependencies
     },

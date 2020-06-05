@@ -16,7 +16,7 @@ import { useConst } from "@uifabric/react-hooks";
 import MaskedInput from "./MaskedInput";
 
 export interface IProps {
-   //properties
+   //properties : PCF =>
    rating: number | undefined;
    icon: string;
    unselectedicon: string;
@@ -26,13 +26,13 @@ export interface IProps {
    isReadonly: boolean;
    isMasked: boolean;
 
-   //return function
+   //Callback function : => PCF
    onChange: (rating: number | undefined) => void;
 }
 
 const RatingControl = (props: IProps): JSX.Element => {
    //REF Object
-   const componentRef = useRef<IRating>(null);
+   const ratingRef = useRef<IRating>(null);
 
    //MEMO
    const componentTheme = useMemo<ITheme>(() => {
@@ -44,7 +44,8 @@ const RatingControl = (props: IProps): JSX.Element => {
       return customTheme;
    }, [props.color]);
 
-   //CUSTOM HOOK provided by FluentUI team : https://github.com/microsoft/fluentui/tree/master/packages/react-hooks
+   //CUSTOM HOOK provided by FluentUI team :
+   // https://github.com/microsoft/fluentui/tree/master/packages/react-hooks
    //Will run function once on first render, like a constructor.
    useConst(() => {
       console.log("useConst : initilize icons");
@@ -52,7 +53,7 @@ const RatingControl = (props: IProps): JSX.Element => {
    });
 
    //STATE HOOKS
-   const [rating, setRating] = useState<number>(props.rating ?? 0);
+   const [rating, setRating] = useState<number | undefined>(props.rating);
 
    //EFFECT HOOKS - side effect after render
    useEffect(() => {
@@ -64,30 +65,29 @@ const RatingControl = (props: IProps): JSX.Element => {
       }
    }, [rating]); //WHEN rating changes,
 
-   //LAYOUTEFFECT HOOKS - side effect before final render
-   useLayoutEffect(() => {
+   useEffect(() => {
       if (rating !== props.rating) {
          console.log("useLayoutEffect props.rating changed : " + props.rating);
-         setRating(props.rating ?? 0);
+         setRating(props.rating);
       }
    }, [props.rating]); //Props are changed
 
    //EVENT Handlers
    const onChangeEvent = (ev: React.FocusEvent<HTMLElement>, rating?: number): void => {
       //console.log("RatingControl - onStarChanged : " + rating)
-      setRating(rating ?? 0); //=> use setter to update state variable
+      setRating(rating); //=> use setter to update state variable
    };
 
    //Hack to put value at zero if the selected value is clicked again
    const onClickEvent = (ev: React.MouseEvent<HTMLElement>): void => {
-      if (componentRef.current !== null) {
-         const current: RatingBase = componentRef.current as RatingBase;
+      if (ratingRef.current !== null) {
+         const current: RatingBase = ratingRef.current as RatingBase;
          const clickedRating = current.state.rating ?? 0;
 
          console.log("CLICK : Previous value: " + rating + ", New value: " + clickedRating);
-         //If newrating is the same as rating, means that the selected item was clicked => Clear the value
+         //If clickedRating is the same as rating, means that the selected item was clicked => Clear the value
          //otherwise set to new value
-         const newRating = clickedRating === rating ? 0 : clickedRating;
+         const newRating = clickedRating === rating ? undefined : clickedRating;
 
          setRating(newRating);
       }
@@ -99,13 +99,13 @@ const RatingControl = (props: IProps): JSX.Element => {
       console.log("-->Component Rendering : rating = " + rating);
       return (
          <Rating
-            componentRef={componentRef}
+            componentRef={ratingRef}
             icon={props.icon}
             unselectedIcon={props.unselectedicon}
             min={0}
             max={props.maxvalue}
             size={RatingSize.Large}
-            rating={rating}
+            rating={rating ?? 0}
             allowZeroStars={true}
             //onChange={onChangeEvent}
             onClick={onClickEvent}

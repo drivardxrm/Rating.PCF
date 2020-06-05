@@ -7,9 +7,10 @@ export class Rating implements ComponentFramework.StandardControl<IInputs, IOutp
    private _notifyOutputChanged: () => void;
    private _container: HTMLDivElement;
 
-   private _selectedRating: number | undefined;
+   private _rating: number | undefined;
 
    private _props: IProps = {
+      //properties
       rating: undefined,
       icon: "",
       unselectedicon: "",
@@ -17,7 +18,7 @@ export class Rating implements ComponentFramework.StandardControl<IInputs, IOutp
       maxvalue: 0,
       isMasked: false,
       isReadonly: false,
-
+      //callback function
       onChange: this.notifyChange.bind(this),
    };
 
@@ -64,11 +65,10 @@ export class Rating implements ComponentFramework.StandardControl<IInputs, IOutp
          isMasked = !context.parameters.ratingvalue.security.readable;
       }
 
-      // Add code to update control view
-      this._selectedRating = context.parameters.ratingvalue.raw || undefined;
+      this._rating = context.parameters.ratingvalue.raw || undefined;
 
       //Prepare the props to send to react component
-      this._props.rating = this._selectedRating;
+      this._props.rating = this._rating;
       this._props.icon = context.parameters.icon.raw || "";
       this._props.unselectedicon = context.parameters.unselectedicon.raw || "";
       this._props.color = context.parameters.color.raw || "";
@@ -80,9 +80,9 @@ export class Rating implements ComponentFramework.StandardControl<IInputs, IOutp
       ReactDOM.render(react.createElement(RatingControl, this._props), this._container);
    }
 
+   //Callback method : React => PCF
    private notifyChange(newRating: number | undefined) {
-      //Set a global variable with the received value from the React component
-      this._selectedRating = newRating;
+      this._rating = newRating;
       this._notifyOutputChanged();
    }
 
@@ -93,7 +93,7 @@ export class Rating implements ComponentFramework.StandardControl<IInputs, IOutp
    public getOutputs(): IOutputs {
       //console.log("index - getOutputs() : ratingvalue = " + this._selectedRating);
       return {
-         ratingvalue: this._selectedRating,
+         ratingvalue: this._rating,
       };
    }
 
