@@ -15,7 +15,7 @@ import { useState, useEffect, useRef, useMemo, useLayoutEffect } from "react";
 import { useConst } from "@uifabric/react-hooks";
 import MaskedInput from "./MaskedInput";
 
-export interface IProps {
+export interface IRatingControlProps {
    //properties : PCF =>
    rating: number | undefined;
    icon: string;
@@ -30,7 +30,7 @@ export interface IProps {
    onChange: (rating: number | undefined) => void;
 }
 
-const RatingControl = (props: IProps): JSX.Element => {
+const RatingControl = (props: IRatingControlProps): JSX.Element => {
    //REF Object
    const ratingRef = useRef<IRating>(null);
 
@@ -67,16 +67,16 @@ const RatingControl = (props: IProps): JSX.Element => {
 
    useEffect(() => {
       if (rating !== props.rating) {
-         console.log("useLayoutEffect props.rating changed : " + props.rating);
+         console.log("useEffect props.rating changed : " + props.rating);
          setRating(props.rating);
       }
    }, [props.rating]); //Props are changed
 
    //EVENT Handlers
-   const onChangeEvent = (ev: React.FocusEvent<HTMLElement>, rating?: number): void => {
-      //console.log("RatingControl - onStarChanged : " + rating)
-      setRating(rating); //=> use setter to update state variable
-   };
+   // const onChangeEvent = (ev: React.FocusEvent<HTMLElement>, newrating?: number): void => {
+   //    //console.log("RatingControl - onStarChanged : " + rating)
+   //    setRating(newrating); //=> use setter to update state variable
+   // };
 
    //Hack to put value at zero if the selected value is clicked again
    const onClickEvent = (ev: React.MouseEvent<HTMLElement>): void => {

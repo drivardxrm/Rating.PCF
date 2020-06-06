@@ -3,7 +3,7 @@
   "steps": [
     {
       "file": "tsconfig.json",
-      "line": 5,
+      "line": 15,
       "description": "For debugging purposes\r\nhttps://www.youtube.com/watch?v=Ov-m5FBUj9g&feature=youtu.be",
       "selection": {
         "start": {
@@ -33,11 +33,11 @@
     },
     {
       "file": "package.json",
-      "line": 18,
+      "line": 19,
       "description": "**Install dependencies on React and FluentUI**\r\n\r\n>> npm install react react-dom @fluentui/react @uifabric/react-hooks\r\n\r\n**Productivity Tip** : use community tools like **PCF Builder** or **PCF Yeoman Generator** \r\n\r\n",
       "selection": {
         "start": {
-          "line": 14,
+          "line": 11,
           "character": 1
         },
         "end": {

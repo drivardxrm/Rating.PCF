@@ -9,10 +9,10 @@
     "start": "pcf-scripts start"
   },
   "dependencies": {
-    "@fluentui/react": "^7.117.0",
-    "@types/node": "^14.0.6",
+    "@fluentui/react": "^7.117.3",
+    "@types/node": "^14.0.11",
     "@types/powerapps-component-framework": "^1.2.3",
-    "@uifabric/react-hooks": "^7.4.4",
+    "@uifabric/react-hooks": "^7.4.5",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   },

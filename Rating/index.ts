@@ -1,7 +1,8 @@
+/* eslint-disable prettier/prettier */
 import { IInputs, IOutputs } from "./generated/ManifestTypes";
-import * as react from "react";
+import * as React from "react";
 import * as ReactDOM from "react-dom";
-import RatingControl, { IProps } from "./RatingControl";
+import RatingControl, { IRatingControlProps } from "./RatingControl";
 
 export class Rating implements ComponentFramework.StandardControl<IInputs, IOutputs> {
    private _notifyOutputChanged: () => void;
@@ -9,7 +10,7 @@ export class Rating implements ComponentFramework.StandardControl<IInputs, IOutp
 
    private _rating: number | undefined;
 
-   private _props: IProps = {
+   private _props: IRatingControlProps = {
       //properties
       rating: undefined,
       icon: "",
@@ -77,7 +78,10 @@ export class Rating implements ComponentFramework.StandardControl<IInputs, IOutp
       this._props.isMasked = isMasked;
 
       console.log("index - updateView-> Render props.rating = " + this._props.rating);
-      ReactDOM.render(react.createElement(RatingControl, this._props), this._container);
+      ReactDOM.render(
+         React.createElement(RatingControl, this._props), 
+         this._container
+      );
    }
 
    //Callback method : React => PCF
@@ -91,7 +95,7 @@ export class Rating implements ComponentFramework.StandardControl<IInputs, IOutp
     * @returns an object based on nomenclature defined in manifest, expecting object[s] for property marked as “bound” or “output”
     */
    public getOutputs(): IOutputs {
-      //console.log("index - getOutputs() : ratingvalue = " + this._selectedRating);
+      console.log("index - getOutputs() : ratingvalue = " + this._rating);
       return {
          ratingvalue: this._rating,
       };
