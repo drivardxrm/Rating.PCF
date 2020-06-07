@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import * as React from "react";
@@ -32,7 +33,7 @@ export interface IRatingControlProps {
 
 const RatingControl = (props: IRatingControlProps): JSX.Element => {
    //REF Object
-   const ratingRef = useRef<IRating>(null);
+   const ratingRef = useRef<RatingBase>(null);
 
    //MEMO
    const componentTheme = useMemo<ITheme>(() => {
@@ -81,8 +82,8 @@ const RatingControl = (props: IRatingControlProps): JSX.Element => {
    //Hack to put value at zero if the selected value is clicked again
    const onClickEvent = (ev: React.MouseEvent<HTMLElement>): void => {
       if (ratingRef.current !== null) {
-         const current: RatingBase = ratingRef.current as RatingBase;
-         const clickedRating = current.state.rating ?? 0;
+         
+         const clickedRating = ratingRef.current.state.rating || undefined;
 
          console.log("CLICK : Previous value: " + rating + ", New value: " + clickedRating);
          //If clickedRating is the same as rating, means that the selected item was clicked => Clear the value

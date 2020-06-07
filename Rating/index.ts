@@ -19,6 +19,7 @@ export class Rating implements ComponentFramework.StandardControl<IInputs, IOutp
       maxvalue: 0,
       isMasked: false,
       isReadonly: false,
+      
       //callback function
       onChange: this.notifyChange.bind(this),
    };
