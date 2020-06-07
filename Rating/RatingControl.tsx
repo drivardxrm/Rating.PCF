@@ -9,7 +9,6 @@ import {
    RatingBase,
    Rating,
    RatingSize,
-   IRating,
    initializeIcons,
 } from "@fluentui/react";
 import { useState, useEffect, useRef, useMemo, useLayoutEffect } from "react";
