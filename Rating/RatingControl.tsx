@@ -36,7 +36,7 @@ const RatingControl = (props: IRatingControlProps): JSX.Element => {
 
    //MEMO
    const componentTheme = useMemo<ITheme>(() => {
-      console.log("useMemo : custom theme");
+      //console.log("useMemo : custom theme");
       const customTheme: ITheme = createTheme(getTheme());
       customTheme.palette.themeDark = props.color; //= hover
       customTheme.palette.themePrimary = props.color; //= hover contour
@@ -48,7 +48,7 @@ const RatingControl = (props: IRatingControlProps): JSX.Element => {
    // https://github.com/microsoft/fluentui/tree/master/packages/react-hooks
    //Will run function once on first render, like a constructor.
    useConst(() => {
-      console.log("useConst : initilize icons");
+      //console.log("useConst : initilize icons");
       initializeIcons();
    });
 
@@ -60,7 +60,7 @@ const RatingControl = (props: IRatingControlProps): JSX.Element => {
       //if value is different from the one received from PROPS
       //Send value back to caller (PCF)
       if (rating !== props.rating) {
-         console.log("useEffect: => props.onChange(" + rating + ")");
+         //console.log("useEffect: => props.onChange(" + rating + ")");
          props.onChange(rating);
       }
    }, [rating]); //WHEN rating changes,
@@ -84,7 +84,7 @@ const RatingControl = (props: IRatingControlProps): JSX.Element => {
          
          const clickedRating = ratingRef.current.state.rating || undefined;
 
-         console.log("CLICK : Previous value: " + rating + ", New value: " + clickedRating);
+         //console.log("CLICK : Previous value: " + rating + ", New value: " + clickedRating);
          //If clickedRating is the same as rating, means that the selected item was clicked => Clear the value
          //otherwise set to new value
          const newRating = clickedRating === rating ? undefined : clickedRating;
@@ -96,7 +96,7 @@ const RatingControl = (props: IRatingControlProps): JSX.Element => {
    if (props.isMasked) {
       return <MaskedInput />;
    } else {
-      console.log("-->Component Rendering : rating = " + rating);
+      //console.log("-->Component Rendering : rating = " + rating);
       return (
          <Rating
             componentRef={ratingRef}

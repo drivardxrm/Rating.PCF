@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <manifest>
-  <control namespace="DR" constructor="Rating" version="0.0.1" display-name-key="Rating" description-key="Rating description" control-type="standard">
+  <control namespace="DR" constructor="Rating" version="0.0.2" display-name-key="Rating" description-key="Rating description" control-type="standard" preview-image="img/rating.png">
 
     <property name="ratingvalue" display-name-key="Rating Value" description-key="Bound field for Rating" of-type="Whole.None" usage="bound" required="true" />
-    <property name="maxvalue" display-name-key="Max Value" description-key="Maximum for Rating" of-type="Whole.None" usage="input" required="false" default-value="5"/>
+    <property name="maxvalue" display-name-key="Max Value" description-key="Maximum value for Rating" of-type="Whole.None" usage="input" required="false" default-value="5"/>
 
-    <property name="icon" display-name-key="Icon" description-key="icon when selected (default : FavoriteStarFill)" of-type="SingleLine.Text" usage="input" required="false" default-value="FavoriteStarFill"/>
-    <property name="unselectedicon" display-name-key="Unselected Icon" description-key="icon when unselected (default : FavoriteStar)" of-type="SingleLine.Text" usage="input" required="false" default-value="FavoriteStar"/>
-    <property name="color" display-name-key="Color" description-key="Selected rating color (default : golden)" of-type="SingleLine.Text" usage="input" required="false" default-value="#FFBF00"/>
+    <property name="icon" display-name-key="Icon" description-key="icon when selected (default : FavoriteStarFill), list here https://developer.microsoft.com/en-us/fluentui#/styles/web/icons" of-type="SingleLine.Text" usage="input" required="false" default-value="FavoriteStarFill"/>
+    <property name="unselectedicon" display-name-key="Unselected Icon" description-key="icon when unselected (default : FavoriteStar), list here https://developer.microsoft.com/en-us/fluentui#/styles/web/icons" of-type="SingleLine.Text" usage="input" required="false" default-value="FavoriteStar"/>
+    <property name="color" display-name-key="Color" description-key="Selected rating color (default : golden(#FFBF00))" of-type="SingleLine.Text" usage="input" required="false" default-value="#FFBF00"/>
 
 
     <resources>

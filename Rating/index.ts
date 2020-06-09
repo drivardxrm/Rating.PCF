@@ -45,7 +45,7 @@ export class Rating implements ComponentFramework.StandardControl<IInputs, IOutp
       state: ComponentFramework.Dictionary,
       container: HTMLDivElement,
    ) {
-      console.log("index - init");
+      //console.log("index - init");
       // Add control initialization code
       this._notifyOutputChanged = notifyOutputChanged;
       this._container = document.createElement("div");
@@ -78,7 +78,7 @@ export class Rating implements ComponentFramework.StandardControl<IInputs, IOutp
       this._props.isReadonly = isReadOnly;
       this._props.isMasked = isMasked;
 
-      console.log("index - updateView-> Render props.rating = " + this._props.rating);
+      //console.log("index - updateView-> Render props.rating = " + this._props.rating);
       ReactDOM.render(
          React.createElement(RatingControl, this._props), 
          this._container
@@ -96,7 +96,7 @@ export class Rating implements ComponentFramework.StandardControl<IInputs, IOutp
     * @returns an object based on nomenclature defined in manifest, expecting object[s] for property marked as “bound” or “output”
     */
    public getOutputs(): IOutputs {
-      console.log("index - getOutputs() : ratingvalue = " + this._rating);
+      //console.log("index - getOutputs() : ratingvalue = " + this._rating);
       return {
          ratingvalue: this._rating,
       };
