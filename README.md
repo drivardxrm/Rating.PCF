@@ -1,4 +1,4 @@
-# Rating.PCF
+# Rating.PCF ![GitHub all releases](https://img.shields.io/github/downloads/drivardxrm/Rating.PCF/total?style=plastic)
 Configurable rating control based on FluentUI. 
 Available icons here : https://developer.microsoft.com/en-us/fabric#/styles/web/icons#available-icons 
 
