@@ -9,7 +9,7 @@
     "start": "pcf-scripts start"
   },
   "dependencies": {
-    "@fluentui/react": "^7.117.3",
+    "@fluentui/react": "^7.199.6",
     "@uifabric/react-hooks": "^7.15.0",
     "react": "^18",
     "react-dom": "^18"
