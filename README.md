@@ -8,8 +8,8 @@ Available icons here : https://developer.microsoft.com/en-us/fabric#/styles/web/
 # Parameters
 | Parameter         | Description                                                                                  | Default     |
 |-------------------|----------------------------------------------------------------------------------------------|----------   |
-| Rating Value  | Bound field for Rating                                                                      |             |
-| Max Value    | Maximum value for Rating                                       | 5|
+| Rating Value  | Bound field for Rating (Whole.None)                                                             |             |
+| Max Value    | Maximum value for Rating  (Whole.None)                                     | 5|
 | Icon   | icon when selected (default : FavoriteStarFill)                                       | FavoriteStarFill   |
 | Unselected Icon    | icon when unselected (default : FavoriteStar)                                             |FavoriteStar     |
 | Color  | Selected rating color (default : golden(#FFBF00))                                                        | #FFBF00        |
